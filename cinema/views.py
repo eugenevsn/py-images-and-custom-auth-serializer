@@ -119,9 +119,9 @@ class MovieViewSet(
         movie = self.get_object()
         serializer = self.get_serializer(movie, data=request.data)
 
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+        return Response(serializer.data)
 
 
 class MovieSessionViewSet(viewsets.ModelViewSet):
